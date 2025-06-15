@@ -88,36 +88,36 @@ export default function LandingPage() {
 //   }
 // };
 
-const handleChange = async (e) => {
-  e.preventDefault();
-  setStatus("Sending...");
+// const handleChange = async (e) => {
+//   e.preventDefault();
+//   setStatus("Sending...");
 
-  const formUrl = "https://script.google.com/macros/s/AKfycbyuRqMI8C6WNJjjOcT_t56JdIeeZvdWP9tTaXLgNtiH992w-z2BQRN0AUreorGkfPos/exec"; 
+//   const formUrl = "https://script.google.com/macros/s/AKfycbyuRqMI8C6WNJjjOcT_t56JdIeeZvdWP9tTaXLgNtiH992w-z2BQRN0AUreorGkfPos/exec"; 
 
-  // Prepare data in URL-encoded format (Google Sheets prefers this)
-  const formBody = new URLSearchParams();
-  formBody.append("name", formData.name);
-  formBody.append("email", formData.email);
-  formBody.append("message", formData.message);
+//   // Prepare data in URL-encoded format (Google Sheets prefers this)
+//   const formBody = new URLSearchParams();
+//   formBody.append("name", formData.name);
+//   formBody.append("email", formData.email);
+//   formBody.append("message", formData.message);
 
-  try {
-    await fetch(formUrl, {
-      method: "POST",
-      mode: "no-cors", // ← Prevents CORS error
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: formBody.toString(),
-    });
+//   try {
+//     await fetch(formUrl, {
+//       method: "POST",
+//       mode: "no-cors", // ← Prevents CORS error
+//       headers: {
+//         "Content-Type": "application/x-www-form-urlencoded",
+//       },
+//       body: formBody.toString(),
+//     });
 
-    // Since 'no-cors' gives no response, assume success
-    setStatus("Message sent!");
-    setFormData({ name: "", email: "", message: "" });
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    setStatus("Failed to send. Please try again.");
-  }
-};
+//     // Since 'no-cors' gives no response, assume success
+//     setStatus("Message sent!");
+//     setFormData({ name: "", email: "", message: "" });
+//   } catch (error) {
+//     console.error("Error submitting form:", error);
+//     setStatus("Failed to send. Please try again.");
+//   }
+// };
 
 
   return (
@@ -182,7 +182,8 @@ const handleChange = async (e) => {
         </div>
 
         {/* Contact Section */}
-        <section>
+        
+        {/* <section>
           <h2 className="text-3xl font-bold text-primary mb-6">Contact Me</h2>
           <form
             onSubmit={handleChange}
@@ -221,10 +222,10 @@ const handleChange = async (e) => {
               className="px-6 py-3 bg-[#ff004f] text-white rounded-md hover:bg-[#cc003f] transition"
             >
               Send Message
-            </button>
+            </button> */}
 
             {/* Status messages */}
-            {status === "Sending..." && (
+            {/* {status === "Sending..." && (
               <p className="text-yellow-500">{status}</p>
             )}
             {status === "Message sent!" && (
@@ -234,7 +235,7 @@ const handleChange = async (e) => {
               <p className="text-red-600">{status}</p>
             )}
           </form>
-        </section>
+        </section> */}
       </main>
 
       <Footer />
