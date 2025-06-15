@@ -24,15 +24,26 @@ export default function LandingPage() {
 
     try {
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbyuRqMI8C6WNJjjOcT_t56JdIeeZvdWP9tTaXLgNtiH992w-z2BQRN0AUreorGkfPos/exec", 
+        "https://script.google.com/macros/s/YOUR_NEW_EXEC_URL/exec",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            name: "Your Name",
+            email: "your@email.com",
+            message: "This is from Firebase site",
+          }),
         }
-      );
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Server response:", data);
+        })
+        .catch((err) => {
+          console.error("Error sending data:", err);
+        });
       const result = await response.json();
       console.log("Server response:", result);
 
@@ -59,12 +70,13 @@ export default function LandingPage() {
             <h2 className="text-3xl font-bold text-primary">About Notes App</h2>
             <p>
               This app helps you find, preview, and save notes for your courses.
-              Organize your study material easily and quickly access what you need.
-              Login to explore all notes and save your favorites for later reference.
+              Organize your study material easily and quickly access what you
+              need. Login to explore all notes and save your favorites for later
+              reference.
             </p>
             <p>
-              Whether you’re a student or a lifelong learner, this app makes note
-              management simple and efficient.
+              Whether you’re a student or a lifelong learner, this app makes
+              note management simple and efficient.
             </p>
           </section>
           <section className="md:w-1/2">
@@ -82,8 +94,9 @@ export default function LandingPage() {
             <h2 className="text-3xl font-bold text-primary">About Me</h2>
             <p>
               Hi! I am Pawan Singh Bhadouriya, the developer behind this app.
-              I’m passionate about building tools that make education more accessible.
-              This project is my effort to help students stay organized and succeed.
+              I’m passionate about building tools that make education more
+              accessible. This project is my effort to help students stay
+              organized and succeed.
             </p>
             <p>I am always open to feedback and ideas to improve this app.</p>
             <p>
