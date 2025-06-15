@@ -185,7 +185,7 @@ const handleChange = async (e) => {
         <section>
           <h2 className="text-3xl font-bold text-primary mb-6">Contact Me</h2>
           <form
-            onSubmit={handleSubmit}
+            onSubmit={handleChange}
             className="max-w-md space-y-4"
             name="submit-to-google-sheet"
           >
