@@ -18,46 +18,76 @@ export default function LandingPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setStatus("Sending...");
+
+  //   try {
+  //     const response = await fetch(
+  //       "https://script.google.com/macros/s/YOUR_NEW_EXEC_URL/exec",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           name: "Your Name",
+  //           email: "your@email.com",
+  //           message: "This is from Firebase site",
+  //         }),
+  //       }
+  //     )
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log("Server response:", data);
+  //       })
+  //       .catch((err) => {
+  //         console.error("Error sending data:", err);
+  //       });
+  //     const result = await response.json();
+  //     console.log("Server response:", result);
+
+  //     if (response.ok) {
+  //       setStatus("Message sent!");
+  //       setFormData({ name: "", email: "", message: "" });
+  //     } else {
+  //       setStatus("Failed to send. Please try again.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     setStatus("Error occurred. Please try again.");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("Sending...");
+  e.preventDefault();
+  setStatus("Sending...");
 
-    try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/YOUR_NEW_EXEC_URL/exec",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: "Your Name",
-            email: "your@email.com",
-            message: "This is from Firebase site",
-          }),
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          console.log("Server response:", data);
-        })
-        .catch((err) => {
-          console.error("Error sending data:", err);
-        });
-      const result = await response.json();
-      console.log("Server response:", result);
+  const formUrl = "https://script.google.com/macros/s/AKfycbyuRqMI8C6WNJjjOcT_t56JdIeeZvdWP9tTaXLgNtiH992w-z2BQRN0AUreorGkfPos/exec";
 
-      if (response.ok) {
-        setStatus("Message sent!");
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setStatus("Failed to send. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setStatus("Error occurred. Please try again.");
-    }
-  };
+  const formBody = new URLSearchParams();
+  formBody.append("name", formData.name);
+  formBody.append("email", formData.email);
+  formBody.append("message", formData.message);
+
+  try {
+    await fetch(formUrl, {
+      method: "POST",
+      mode: "no-cors", // IMPORTANT
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: formBody.toString()
+    });
+
+    setStatus("Message sent!");
+    setFormData({ name: "", email: "", message: "" });
+  } catch (error) {
+    console.error("Error:", error);
+    setStatus("Error occurred. Please try again.");
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-light dark:bg-dark text-black dark:text-white">
