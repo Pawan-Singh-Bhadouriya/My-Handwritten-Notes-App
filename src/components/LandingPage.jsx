@@ -14,9 +14,9 @@ export default function LandingPage() {
 
   const [status, setStatus] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -59,12 +59,42 @@ export default function LandingPage() {
   //   }
   // };
 
-  const handleSubmit = async (e) => {
+//   const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   setStatus("Sending...");
+
+//   const formUrl = "https://script.google.com/macros/s/AKfycbyuRqMI8C6WNJjjOcT_t56JdIeeZvdWP9tTaXLgNtiH992w-z2BQRN0AUreorGkfPos/exec";
+
+//   const formBody = new URLSearchParams();
+//   formBody.append("name", formData.name);
+//   formBody.append("email", formData.email);
+//   formBody.append("message", formData.message);
+
+//   try {
+//     await fetch(formUrl, {
+//       method: "POST",
+//       mode: "no-cors", // IMPORTANT
+//       headers: {
+//         "Content-Type": "application/x-www-form-urlencoded"
+//       },
+//       body: formBody.toString()
+//     });
+
+//     setStatus("Message sent!");
+//     setFormData({ name: "", email: "", message: "" });
+//   } catch (error) {
+//     console.error("Error:", error);
+//     setStatus("Error occurred. Please try again.");
+//   }
+// };
+
+const handleChange = async (e) => {
   e.preventDefault();
   setStatus("Sending...");
 
-  const formUrl = "https://script.google.com/macros/s/AKfycbyuRqMI8C6WNJjjOcT_t56JdIeeZvdWP9tTaXLgNtiH992w-z2BQRN0AUreorGkfPos/exec";
+  const formUrl = "https://script.google.com/macros/s/AKfycbyuRqMI8C6WNJjjOcT_t56JdIeeZvdWP9tTaXLgNtiH992w-z2BQRN0AUreorGkfPos/exec"; 
 
+  // Prepare data in URL-encoded format (Google Sheets prefers this)
   const formBody = new URLSearchParams();
   formBody.append("name", formData.name);
   formBody.append("email", formData.email);
@@ -73,18 +103,19 @@ export default function LandingPage() {
   try {
     await fetch(formUrl, {
       method: "POST",
-      mode: "no-cors", // IMPORTANT
+      mode: "no-cors", // ← Prevents CORS error
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: formBody.toString()
+      body: formBody.toString(),
     });
 
+    // Since 'no-cors' gives no response, assume success
     setStatus("Message sent!");
     setFormData({ name: "", email: "", message: "" });
   } catch (error) {
-    console.error("Error:", error);
-    setStatus("Error occurred. Please try again.");
+    console.error("Error submitting form:", error);
+    setStatus("Failed to send. Please try again.");
   }
 };
 
