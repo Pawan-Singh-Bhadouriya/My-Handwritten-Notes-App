@@ -80,9 +80,14 @@ export default function Navbar() {
                 </button>
               </>
             ) : (
+              <>
               <Link to="/login" className="text-blue-600 hover:underline text-sm">
                 Login
               </Link>
+              <Link to="/SignUp" className="text-blue-600 hover:underline text-sm">
+                Sign Up
+              </Link>
+              </>
             )}
           </div>
 

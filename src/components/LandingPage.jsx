@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import aboutAppImg from "/images/favicon.png";
@@ -6,13 +6,13 @@ import aboutMeImg from "/images/me.png";
 import { NavLink } from "react-router-dom";
 
 export default function LandingPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   email: "",
+  //   message: "",
+  // });
 
-  const [status, setStatus] = useState("");
+  // const [status, setStatus] = useState("");
 
   // const handleChange = (e) => {
   //   setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -139,6 +139,7 @@ export default function LandingPage() {
               Whether you’re a student or a lifelong learner, this app makes
               note management simple and efficient.
             </p>
+            <p><span className="font-bold text-primary">Note : </span>Those subjects whose handwritten notes are not available right now are attached with their respective books</p>
           </section>
           <section className="md:w-1/2">
             <img
