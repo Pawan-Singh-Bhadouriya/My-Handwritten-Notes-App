@@ -159,6 +159,7 @@ export default function Navbar() {
               </button>
             </>
           ) : (
+            <>
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
@@ -166,6 +167,14 @@ export default function Navbar() {
             >
               Login
             </Link>
+            <Link
+              to="/SignUp"
+              onClick={() => setIsOpen(false)}
+              className="block text-blue-600 hover:underline text-sm"
+            >
+              Sign Up
+            </Link>
+            </>
           )}
         </div>
         
